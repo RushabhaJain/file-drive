@@ -1,7 +1,13 @@
 "use client";
 
-import { OrganizationSwitcher, SignedIn } from "@clerk/clerk-react";
+import {
+  OrganizationSwitcher,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+} from "@clerk/clerk-react";
 import { UserButton } from "@clerk/nextjs";
+import { Button } from "./ui/button";
 
 export function Header() {
   return (
@@ -12,6 +18,11 @@ export function Header() {
           <OrganizationSwitcher />
           <UserButton />
         </SignedIn>
+        <SignedOut>
+          <SignInButton mode="modal">
+            <Button>Sign In</Button>
+          </SignInButton>
+        </SignedOut>
       </div>
     </div>
   );
