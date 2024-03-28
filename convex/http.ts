@@ -25,6 +25,16 @@ httpRouter.route({
           await ctx.runMutation(internal.users.createUser, {
             tokenIdentifier:
               "https://excited-rhino-79.clerk.accounts.dev|" + result.data.id,
+            name: `${result.data.first_name} ${result.data.last_name}`,
+            image: result.data.image_url,
+          });
+          break;
+        case "user.updated":
+          await ctx.runMutation(internal.users.createUser, {
+            tokenIdentifier:
+              "https://excited-rhino-79.clerk.accounts.dev|" + result.data.id,
+            name: `${result.data.first_name} ${result.data.last_name}`,
+            image: result.data.image_url,
           });
           break;
         case "organizationMembership.created":
@@ -33,6 +43,7 @@ httpRouter.route({
               "https://excited-rhino-79.clerk.accounts.dev|" +
               result.data.public_user_data.user_id,
             orgId: result.data.organization.id,
+            role: result.data.role === "admin" ? "admin" : "member",
           });
           break;
       }
